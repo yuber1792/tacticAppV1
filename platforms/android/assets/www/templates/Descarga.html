@@ -1,0 +1,181 @@
+<ion-view view-title="Descarga" >
+  
+<ion-nav-bar ng-init="activarComponentesDescarga()" class="bar-positive">
+        <ion-nav-back-button></ion-nav-back-button>
+      </ion-nav-bar>
+  <ion-content    class="padding">
+
+    <div class="card" ng-show="jsonIngreso.verUsuario">
+      <div class="item item-text-wrap">
+        Usuario : {{jsonIngreso.usuario}} <br>
+        Bodega : {{jsonIngreso.bodega}} <br>
+        Ambiente : {{jsonIngreso.ambiente}} <br>
+        Nombres : {{jsonIngreso.nombres}} <br>
+        Apellidos : {{jsonIngreso.apellidos}} <br><br>
+        <button class="button button-small button-positive ion-log-in" ng-disabled="jsonIngreso.cerrarSesion"  ng-click="abrirMiCuenta()" >
+          Mi cuenta
+      </button>
+       <button class="button button-small button-positive ion-log-in" ng-disabled="jsonIngreso.cerrarSesion"  ng-click="cerrarSesion()" >
+          Cerrar sesion
+      </button>
+      </div>
+  </div>
+        <center>
+            <img ng-show="imgURI_antes_descarga !== undefined" ng-src="{{imgURI_antes_descarga}}">
+            <img ng-show="imgURI_antes_descarga === undefined" ng-src="http://placehold.it/300x300">
+        </center>
+        
+      <button  ng-disabled="componentes.botonFotoInicioDescarga"  class="button button-block button-positive ion-ios-camera" ng-click="fotoAntesDescarga()" >
+          Foto antes de descargue *
+      </button>
+      <br>
+      <div class="item item-divider">
+            Datos del vehículo y transportadora
+        </div>
+         <label class="item item-input item-select">
+          <div class="input-label">
+            Transportadora *
+          </div>
+          <select ng-model="jsonDescarga.transportadoraData" ng-disabled="componentes.comboTransportadora">
+            <option  ng-repeat="trans in transportadora">{{trans.texto}}</option>
+          </select>
+        </label>  
+         <label class="item item-input item-select">
+          <div class="input-label">
+            Vehículo *
+          </div>
+          <select ng-model="jsonDescarga.vehiculo" ng-disabled="componentes.comboVehiculo">
+            <option  ng-repeat="vehiculo in tipoVehiculo">{{vehiculo.texto}}</option>
+          </select>
+        </label>  
+      <div class="list">
+       <label class="item item-input">
+          <span class="input-label">Placa vehículo *</span>
+          <input ng-model="jsonDescarga.placaVehiculo" ng-disabled="componentes.campoPlacaVehiculo" type="text">
+      </label>
+       <label class="item item-input">
+          <span class="input-label">Placa remolque</span>
+          <input  ng-model="jsonDescarga.placaRemolque" ng-disabled="componentes.campoPlacaRemolque" type="text">
+      </label>
+         <center>
+            <img ng-show="imgURI_piso !== undefined" ng-src="{{imgURI_piso}}">
+            <img ng-show="imgURI_piso === undefined" ng-src="http://placehold.it/300x300">
+        </center>
+        
+      <button  ng-disabled="componentes.botonFotoInicioDescarga"  class="button button-block button-positive ion-ios-camera" ng-click="fotoPiso()" >
+          Foto piso contenedor
+      </button>
+       <label class="item item-input">
+          <span class="input-label">Número de precinto*</span>
+          <input ng-model="jsonDescarga.numeroPrecinto" ng-disabled="componentes.campoNumeroPrecinto" type="text">
+      </label>
+       <center>
+             <img ng-show="imgURI_precinto !== undefined" ng-src="{{imgURI_precinto}}">
+              <img ng-show="imgURI_precinto === undefined" ng-src="http://placehold.it/300x300">
+        </center>
+        <button ng-disabled="componentes.botonFotoPrecinto" class="button button-block button-positive ion-ios-camera"  ng-click="fotoPrecinto()" >
+          Foto precinto *
+      </button>
+      <div class="item item-divider">
+            Documentos 
+      </div>
+         <li  class="item item-toggle">
+        Producto nacional  
+         <label class="toggle toggle-positive">
+           <input ng-disabled="componentes.checkProductoNacional" type="checkbox" ng-change="desactivaProdductoCheck('nacional')" ng-model="jsonDescarga.productoNacionalCheck">
+           <div class="track">
+             <div class="handle"></div>
+           </div>
+         </label>
+       </li>
+         <div ng-show="jsonDescarga.productoNacionalCheck">
+              <div class="item item-divider">
+                   Documentos recepción mercancía nacional
+              </div>
+              <ion-list>
+
+                  <ion-checkbox ng-repeat="producto in  productoNacional" ng-model="producto.checked" 
+                      ng-checked="producto.checked" >{{producto.texto}}</ion-checkbox>
+                
+
+              </ion-list>
+       </div>
+      <li  class="item item-toggle">
+        Producto importado
+         <label class="toggle toggle-positive">
+           <input ng-disabled="componentes.checkProductoImportado" type="checkbox" ng-change="desactivaProdductoCheck('importado')" ng-model="jsonDescarga.info">
+           <div class="track">
+             <div class="handle"></div>
+           </div>
+         </label>
+       </li>
+         <div ng-show="jsonDescarga.info">
+              <div class="item item-divider">
+                   Documentos recepcion mercancia extranjera
+              </div>
+              <ion-list>
+
+                  <ion-checkbox ng-repeat="producto in  productoImportado" ng-model="producto.checked" 
+                      ng-checked="producto.checked" >{{producto.texto}}</ion-checkbox>
+                
+
+              </ion-list>
+       </div>
+       <li class="item item-toggle">
+        Plásticos
+         <label class="toggle toggle-positive">
+           <input  type="checkbox" ng-change="desactivaRentaPlastico('plas')" ng-model="jsonDescargas.plasticos">
+           <div class="track">
+             <div class="handle"></div>
+           </div>
+         </label>
+       </li> 
+        <div ng-show="jsonDescargas.plasticos">
+                  <div class="item item-divider">
+                   Documentos productos plasticos
+              </div>
+              <ion-list>
+
+                  <ion-checkbox ng-repeat="plastico in  plasticos" ng-model="plastico.checked" 
+                      ng-checked="plastico.checked" >{{plastico.texto}}</ion-checkbox>
+              
+
+              </ion-list>
+       </div>
+         <li class="item item-toggle">
+        Rentas
+         <label class="toggle toggle-positive">
+           <input  type="checkbox" ng-change="desactivaRentaPlastico('renta')" ng-model="jsonDescargas.rentas">
+           <div class="track">
+             <div class="handle"></div>
+           </div>
+         </label>
+       </li> 
+        <div ng-show="jsonDescargas.rentas">
+              <div class="item item-divider">
+                   Información tornaguias
+              </div>
+               <label class="item item-input">
+                 <span class="input-label">Número de tornaguía</span>
+                 <input  ng-model="jsonDescargas.numeroTornaguia" type="text">
+             </label>
+               <label class="item item-input">
+                 <span class="input-label">Fondo cuenta</span>
+                 <input  ng-model="jsonDescargas.fondoCuenta" type="text">
+             </label>
+              <center>
+            <img ng-show="imgURI_tornaguia !== undefined" ng-src="{{imgURI_tornaguia}}">
+            <img ng-show="imgURI_tornaguia === undefined" ng-src="http://placehold.it/300x300">
+            </center>
+               <button class="button button-block button-positive ion-ios-camera" ng-click="fotoTornaguia()" >
+                  Foto tornaguía
+            </button>
+            
+       </div>
+     
+    </div>
+
+
+
+  </ion-content>
+</ion-view>

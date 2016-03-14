@@ -1,0 +1,33 @@
+<ion-modal-view  style="width: 100%; height: 100%; top: 0%; left: 0%;" >
+
+  <ion-header-bar  >
+    <h1 class="title">Mi cuenta</h1>
+    <div class="buttons">
+      <button  class="button button-clear" ng-click="cerrarMiCuenta()" >Cerrar</button>
+    </div>
+  </ion-header-bar>
+  <ion-content class="padding" >
+   		 <label class="item item-input item-select">
+          <div class="input-label">
+            Ambiente
+          </div>
+          <select ng-model="jsonIngreso.ambiente"  ng-change="asignarAmbiente()">
+          	 <option  >Seleccionar</option>
+            <option  ng-repeat="amb in ambiente">{{amb.nombre}}</option>
+          </select>
+        </label>
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Bodega
+          </div>
+          <select ng-model="jsonIngreso.bodega"  ng-change="cargaClientes()">
+            <option value="{{bodega.codigo}}" ng-repeat="bodega in bodegas">{{bodega.texto}}</option>
+          </select>
+        </label>
+
+        <button class="button button-block button-positive ion-log-in" ng-click="cerrarMiCuenta()" >
+          Guardar
+    </button>
+  </ion-content>
+</div>
+</ion-modal-view>

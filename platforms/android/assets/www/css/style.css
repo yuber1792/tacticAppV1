@@ -1,0 +1,34 @@
+/* Empty. Add your own CSS if you like */
+
+
+.tabs .tab-item .icon.ingreso {
+  background-repeat: no-repeat;
+  background-position: 50%;
+  height: 60%;
+  background-image: url('../img/ingreso.png');
+  background-size:contain;
+}
+
+.tabs .tab-item .icon.descarga {
+  background-repeat: no-repeat;
+  background-position: 50%;
+  height: 60%;
+  background-image: url('../img/descargue.png');
+  background-size:contain;
+}
+
+.tabs .tab-item .icon.producto {
+  background-repeat: no-repeat;
+  background-position: 50%;
+  height: 60%;
+  background-image: url('../img/producto.png');
+  background-size:contain;
+}
+
+.tabs .tab-item .icon.salida {
+  background-repeat: no-repeat;
+  background-position: 50%;
+  height: 60%;
+  background-image: url('../img/envio.png');
+  background-size:contain;
+}

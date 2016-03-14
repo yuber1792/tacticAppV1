@@ -1,0 +1,44 @@
+<ion-modal-view  style="width: 100%; height: 100%; top: 0%; left: 0%;" >
+
+  <ion-header-bar  >
+    <h1 class="title">Login</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeLogin()">Cerrar</button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <form ng-submit="doLogin()">
+      <div class="list">
+         <label class="item item-input item-select">
+          <div class="input-label">
+            Ambiente
+          </div>
+          <select ng-model="jsonIngreso.ambiente"  ng-change="asignarAmbiente()">
+             <option  >Seleccionar</option>
+            <option  ng-repeat="amb in ambiente">{{amb.nombre}}</option>
+          </select>
+        </label>
+        <!--<label class="item item-input">
+          <span class="input-label">Ip</span>
+          <input type="text" ng-model="jsonIngreso.ip"> 
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Puerto</span>
+          <input type="text" ng-model="jsonIngreso.puerto">
+        </label>-->
+        <label class="item item-input">
+          <span class="input-label">Usuario</span>
+          <input type="text" ng-model="jsonIngreso.usuario">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Clave</span>
+          <input type="password" ng-model="jsonIngreso.clave">
+        </label>
+        <label class="item">
+          <button class="button button-block button-positive" type="submit">Continuar</button>
+        </label>
+      </div>
+    </form>
+  </ion-content>
+</div>
+</ion-modal-view>

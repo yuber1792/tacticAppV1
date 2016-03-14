@@ -1,0 +1,105 @@
+<ion-modal-view  style="width: 100%; height: 100%; top: 0%; left: 0%;" >
+
+  <ion-header-bar  >
+    <h1 class="title">Editar producto</h1>
+    <div class="buttons">
+      <button  class="button button-clear" ng-click="cerrarProductos()">Cerrar</button>
+    </div>
+  </ion-header-bar>
+  <ion-content scroll="true">
+
+
+       <label class="item item-input item-select">
+          <div class="input-label">
+            Producto *
+          </div>
+            <ion-select label="Producto" label-field="nombre" provider="productosTotales" ng-disabled="true"  ng-change="cargaUnidades()"  ng-model="productoSeleccionado.producto" value="codigo" />
+         <!-- <select   ng-model="productoAdd.producto"  ng-change="cargaUnidades()">
+            <option  value="{{producto.codigo}}" ng-repeat="producto in productosTotales"> {{producto.codigo}} -- {{producto.nombreLargo}}</option>s
+          </select>-->
+        </label>   
+        <label class="item item-input item-select">
+              Unidad de medida
+            </div>
+            <select ng-model="productoSeleccionado.unidadMedida" >
+              <option  ng-repeat="unidad in unidadesMedida">{{unidad.texto}}</option>
+            </select>
+        </label>
+        <label class="item item-input">
+            <span class="input-label">Lote</span>
+            <input  ng-model="productoSeleccionado.loteSugerido" type="text">
+        </label>
+           <label class="item item-input">
+          <span class="input-label">Cantidad esperada*</span>
+         <input ng-model="productoSeleccionado.cantidadEsperada"  type="number">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Cantidad recibida*</span>
+         <input ng-model="productoSeleccionado.cantidadRecibida" type="number">
+        </label>
+         <label class="item item-input">
+            <span class="input-label">Cantidad averiada*</span>
+            <input ng-model="productoSeleccionado.cantidadAverias" type="number">
+          </label>
+         <center>
+            <button class="button button-small button-positive ion-log-in" ng-click="calcularProductosEdicion()">
+              Calcular
+            </button>
+        </center>
+
+       
+                <label class="item item-input">
+                  <span class="input-label">Cantidad disponible</span>
+                 <input ng-model="productoSeleccionado.cantidadDisponible"  ng-disabled="true" type="number">
+              </label>
+              <label class="item item-input">
+                  <span class="input-label">Cantidad sobrante</span>
+                 <input ng-model="productoSeleccionado.cantidadSobrante"  ng-disabled="true" type="number">
+              </label>
+               <label class="item item-input">
+                  <span class="input-label">Cantidad faltante</span>
+                 <input ng-model="productoSeleccionado.cantidadFaltantes" ng-disabled="true" type="number">
+              </label>
+             
+               <center>
+                  <button class="button button-small button-positive " ng-click="verificarNovedades()">
+                    verificar novedades
+                  </button>
+              </center>
+
+
+              <div ng-show="productoSeleccionado.agregarNovedades">
+                    <center>
+                      <img ng-show="productoSeleccionado.imgURI_novedad !== undefined" ng-src="{{imgURI_novedad}}">
+                      <img ng-show="productoSeleccionado.imgURI_novedad === undefined" ng-src="http://placehold.it/300x300">
+                    </center>
+        
+                      <button  ng-disabled="componentes.botonFotoInicioDescarga"  class="button button-block button-positive ion-ios-camera" ng-click="fotoNovedadEdicion()" >
+                          Foto novedad
+                      </button>
+                      <div class="item item-divider">
+                           Tipo novedad 
+                      </div>
+                     <div class="input-label">
+                              <ion-list >
+                                  <ion-checkbox  ng-repeat="novedad in novedades" ng-model="novedad.checked" 
+                                      ng-checked="novedad.checked">{{novedad.texto}}</ion-checkbox>
+                              </ion-list> 
+                            <div class="item item-divider">
+                                  Descripción Novedad 
+                             </div>     
+                             <label class="item item-input item-floating-label">                
+                               <input  ng-model="productoSeleccionado.descripcionNovedad" type="text" placeholder="Agregar descripcion">
+                             </label>      
+                      </div>
+             </div>
+        
+       
+       
+          <button class="button button-block button-positive ion-checkmark-circled" ng-click="finalizarEdicion()" >
+          Finalizar edición
+      </button>
+  
+  </ion- content>
+
+</ion-modal-view>

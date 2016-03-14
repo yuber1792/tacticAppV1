@@ -1,0 +1,104 @@
+<ion-view view-title="Ingreso"  >
+    <ion-nav-buttons side="primary">
+     <a class="button icon ion-ios-box-outline" ng-click="insertarLocal('sirve')"></button>
+      
+      </a>
+    </ion-nav-buttons>
+
+ <ion-nav-bar class="bar-positive">
+        <ion-nav-back-button></ion-nav-back-button>
+      </ion-nav-bar>
+  <ion-content class="padding">
+  <div class="card" ng-show="jsonIngreso.verUsuario">
+      <div class="item item-text-wrap">
+        Usuario : {{jsonIngreso.usuario}} <br>
+        Bodega : {{jsonIngreso.bodega}} <br>
+        Ambiente : {{jsonIngreso.ambiente}} <br>
+        Nombres : {{jsonIngreso.nombres}} <br>
+        Apellidos : {{jsonIngreso.apellidos}} <br><br>
+        <button class="button button-small button-positive ion-log-in" ng-disabled="jsonIngreso.cerrarSesion"  ng-click="abrirMiCuenta()" >
+          Mi cuenta
+      </button>
+      
+       <button class="button button-small button-positive ion-log-in" ng-disabled="jsonIngreso.cerrarSesion"  ng-click="cerrarSesion()" >
+          Cerrar sesion
+      </button>
+      </div>
+  </div>
+     <button class="button  button-block button-positive ion-log-in" ng-disabled="jsonIngreso.login"  ng-click="login()" >
+          Login
+      </button>
+      <!--  <button class="button button-small button-positive" ng-click="scanBarcode()" > ng-click="nuevaEntrada()"
+          Scan
+      </button>-->
+   <button class="button button-block button-positive ion-log-in"  ng-disabled="jsonIngreso.nuevaEntrada"  ng-click="nuevaEntrada()" >
+          Nuevo ingreso
+    </button>
+
+  <center>
+      <img    ng-show="imgURI_ingreso !== undefined" ng-src="{{imgURI_ingreso}}"  >
+       <img    ng-show="imgURI_ingreso === undefined" ng-src="http://placehold.it/300x300"  >
+  </center>
+      <button  ng-disabled="componentes.botonFotoIngreso"  class="button button-block button-positive ion-ios-camera" ng-click="fotoIngreso()" >
+          Foto antes de ingreso *
+      </button>
+      <br>
+      <div class="list">
+          <div class="item item-divider">
+            Datos del cliente
+          </div>
+           <label class="item item-input">
+              <span class="input-label">Fecha</span>
+             <input ng-model="jsonIngreso.fechaInicio" type="text" value="{{jsonIngreso.fechaInicio}}" ng-disabled="true">
+          </label>
+              <label class="item item-input">
+              <span class="input-label">Bodega</span>
+             <input ng-model="jsonIngreso.bodega" type="text" value="{{jsonIngreso.bodega}}" ng-disabled="true">
+          </label>
+       
+         <!--<label class="item item-input item-select">
+          <div class="input-label">
+            Bodega *
+          </div>
+          <select ng-model="jsonIngreso.bodega" ng-disabled="componentes.comboBodega" ng-change="cargaClientes()">
+            <option value="{{bodega.codigo}}" ng-repeat="bodega in bodegas">{{bodega.texto}}</option>
+          </select>
+        </label>-->
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Cliente *
+          </div>
+          <select ng-model="jsonIngreso.cliente" ng-disabled="componentes.comboCliente"  ng-change="cargaProveedores()">
+            <option value="{{cliente.codigo}}" ng-repeat="cliente in clientesXbodega">{{cliente.codigo}}</option>
+          </select>
+        </label>
+
+         <label class="item item-input">
+          <span class="input-label">N documento del Cliente *</span>
+         <input ng-model="jsonIngreso.numeroDocumento" ng-disabled="componentes.comoboProveedores" type="text">
+        </label>
+      
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Proveedores
+          </div>
+          <select  ng-model="jsonIngreso.proveedores" ng-disabled="componentes.comoboProveedores">
+               <option  ng-repeat="prov in proveedoresData">{{prov.texto}}</option>
+          </select>
+        </label>
+         <label class="item item-input item-select">
+          <div class="input-label">
+            Ciudad origen *
+          </div>
+          <select ng-model="jsonIngreso.ciudadOrigen" ng-disabled="componentes.comboCiudadOrigen">
+             <option  ng-repeat="ciudad in ciudadOrigenData">{{ciudad.texto}}</option>
+             
+          </select>
+        </label>
+               
+      </div>
+
+    
+  </ion-content>
+</ion-view>
+

@@ -1,0 +1,7 @@
+ {"bodegas" : {
+             "one":{"id":"0", "texto":"BODEGA BOGOTA"},  
+             "two":{"id":"1", "texto":"BODEGA MONTEVIDEO"},  
+             "three":{"id":"2", "texto":"BOG-CEDI SIBERIA 1"}
+            }
+                               
+}
