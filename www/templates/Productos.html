@@ -1,0 +1,270 @@
+<ion-view view-title="Productos">
+  <ion-nav-buttons side="primary">
+      <button class="button"  ng-click="abrirProductos()">
+        Agregar producto
+      </button>
+    </ion-nav-buttons>
+<ion-nav-bar class="bar-positive">
+        <ion-nav-back-button></ion-nav-back-button>
+      </ion-nav-bar>
+  <ion-content  class="padding">
+  <div class="card" ng-show="jsonIngreso.verUsuario">
+      <div class="item item-text-wrap">
+        Usuario : {{jsonIngreso.usuario}} <br>
+        Bodega : {{jsonIngreso.bodega}} <br>
+        Ambiente : {{jsonIngreso.ambiente}} <br>
+        Nombres : {{jsonIngreso.nombres}} <br>
+        Apellidos : {{jsonIngreso.apellidos}} <br><br>
+        <button class="button button-small button-positive ion-log-in" ng-disabled="jsonIngreso.cerrarSesion"  ng-click="abrirMiCuenta()" >
+          Mi cuenta
+      </button>
+       <button class="button button-small button-positive ion-log-in" ng-disabled="jsonIngreso.cerrarSesion"  ng-click="cerrarSesion()" >
+          Cerrar sesion
+      </button>
+      </div>
+  </div>
+    <div ng-show="agregaProducto">
+        <div class="item item-divider">
+            Agregar producto
+        </div>
+        
+
+       <label class="item item-input item-select">
+          <div class="input-label">
+            Producto *
+          </div>
+            <ion-select label="Producto" label-field="nombre" provider="productosTotales"  ng-change="cargaUnidades()"  ng-model="productoAdd.producto" value="codigo" />
+         <!-- <select   ng-model="productoAdd.producto"  ng-change="cargaUnidades()">
+            <option  value="{{producto.codigo}}" ng-repeat="producto in productosTotales"> {{producto.codigo}} -- {{producto.nombreLargo}}</option>s
+          </select>-->
+        </label>       
+       
+        <label class="item item-input">
+            <span class="input-label">Lote</span>
+            <input  ng-model="productoAdd.lote" type="text">
+        </label>
+          <label class="item item-input item-select">
+            <div class="input-label">
+              Unidad de medida *
+            </div>
+            <select ng-model="productoAdd.unidadMedida" >
+              <option  ng-repeat="unidad in unidadesMedida">{{unidad.texto}}</option>
+            </select>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Cantidad esperada*</span>
+         <input ng-model="productoAdd.cantidadEsperada"  type="number">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Cantidad recibida*</span>
+         <input ng-model="productoAdd.cantidadRecibida" type="number">
+        </label>
+         <label class="item item-input">
+                  <span class="input-label">Cantidad averiada*</span>
+                 <input ng-model="productoAdd.cantidadAveria" type="number">
+              </label>
+        <center>
+            <button class="button button-small button-positive ion-log-in" ng-click="calcularProductos()">
+              Calcular
+            </button>
+        </center>
+
+        <div ng-show="productoAdd.mostrarCantidades">
+                <label class="item item-input">
+                  <span class="input-label">Cantidad disponible</span>
+                 <input ng-model="productoAdd.cantidadDisponible"  ng-disabled="true" type="number">
+              </label>
+              <label class="item item-input">
+                  <span class="input-label">Cantidad sobrante</span>
+                 <input ng-model="productoAdd.cantidadSobrante"  ng-disabled="true" type="number">
+              </label>
+               <label class="item item-input">
+                  <span class="input-label">Cantidad faltante</span>
+                 <input ng-model="productoAdd.cantidadFaltante" ng-disabled="true" type="number">
+              </label>
+             
+               <center>
+                  <button class="button button-small button-positive " ng-click="verificarNovedades()">
+                    verificar novedades
+                  </button>
+              </center>
+        </div>
+
+              <div ng-show="agregarNovedades">
+                    <center>
+                      <img ng-show="imgURI_novedad !== undefined" ng-src="{{imgURI_novedad}}">
+                      <img ng-show="imgURI_novedad === undefined" ng-src="http://placehold.it/300x300">
+                    </center>
+        
+                      <button  ng-disabled="componentes.botonFotoInicioDescarga"  class="button button-block button-positive ion-ios-camera" ng-click="fotoNovedad()" >
+                          Foto novedad
+                      </button>
+                      <div class="item item-divider">
+                           Tipo novedad 
+                      </div>
+                      <ion-list >
+                          <ion-checkbox  ng-repeat="novedad in novedades" ng-model="novedad.checked" 
+                              ng-checked="novedad.checked">{{novedad.texto}}</ion-checkbox>
+                      </ion-list> 
+                    <div class="item item-divider">
+                          Descripción Novedad 
+                     </div>     
+                     <label class="item item-input item-floating-label">                
+                       <input  ng-model="productoAdd.descripcionNovedad" type="text" placeholder="Agregar descripcion">
+                     </label>      
+              </div>
+        
+             
+     
+         <!--<label class="item item-input item-select">
+            <div class="input-label">
+              Estado inventario *
+            </div>
+            <select  ng-model="productoAdd.estadoInventario">
+              <option  ng-repeat="estado in estadoInventarios">{{estado.texto}}</option>
+            </select>
+        </label>-->
+        <!--<li class="item item-toggle">
+        Novedades
+         <label class="toggle toggle-positive">
+           <input type="checkbox" ng-model="productoAdd.nove">
+           <div class="track">
+             <div class="handle"></div>
+           </div>
+         </label>
+       </li> -->
+
+        
+          <button class="button button-block button-positive ion-checkmark-circled" ng-click="AgregarProducto()" >
+          Agregar
+      </button>
+
+  </div>
+
+    
+        <div class="item item-divider">
+            Información de productos
+           
+      </div>
+
+<div class="item item-button-right" ng-repeat="producto in productos">
+   {{producto.nombre}}, Recibido : {{producto.cantidadDisponible}} {{producto.unidadMedida}}
+   <div class="button-bar">
+    <a class="button icon button-positive button-small " ng-click="editarProducto($index)">
+      <i class="ion-edit"></i>
+    </a>
+    <a class="button icon button-positive button-small  " ng-click="eliminarProducto($index)">
+      <i class="ion-trash-a"></i>
+    </a>
+    </div>
+  </div>
+
+  <div ng-show="productoSeleccionado.mostrarEdicion">
+     <div class="item item-divider">
+           Editar producto
+           
+      </div>
+
+  <label class="item item-input item-select">
+          <div class="input-label">
+            Producto *
+          </div>
+            <ion-select label="Producto" label-field="nombre" provider="productosTotales" ng-disabled="true"  ng-change="cargaUnidades()"  ng-model="productoSeleccionado.producto" value="codigo" />
+         <!-- <select   ng-model="productoAdd.producto"  ng-change="cargaUnidades()">
+            <option  value="{{producto.codigo}}" ng-repeat="producto in productosTotales"> {{producto.codigo}} -- {{producto.nombreLargo}}</option>s
+          </select>-->
+        </label>   
+        <label class="item item-input item-select">
+              Unidad de medida         
+            <select ng-model="productoSeleccionado.unidadMedida" >
+              <option  ng-repeat="unidad in unidadesMedida">{{unidad.texto}}</option>
+            </select>
+        </label>
+        <label class="item item-input">
+            <span class="input-label">Lote</span>
+            <input  ng-model="productoSeleccionado.loteSugerido" type="text">
+        </label>
+           <label class="item item-input">
+          <span class="input-label">Cantidad esperada*</span>
+         <input ng-model="productoSeleccionado.cantidadEsperada"  type="number">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Cantidad recibida*</span>
+         <input ng-model="productoSeleccionado.cantidadRecibida" type="number">
+        </label>
+         <label class="item item-input">
+            <span class="input-label">Cantidad averiada*</span>
+            <input ng-model="productoSeleccionado.cantidadAverias" type="number">
+          </label>
+         <center>
+            <button class="button button-small button-positive ion-log-in" ng-click="calcularProductosEdicion()">
+              Calcular
+            </button>
+        </center>
+
+       
+                <label class="item item-input">
+                  <span class="input-label">Cantidad disponible</span>
+                 <input ng-model="productoSeleccionado.cantidadDisponible"  ng-disabled="true" type="number">
+              </label>
+              <label class="item item-input">
+                  <span class="input-label">Cantidad sobrante</span>
+                 <input ng-model="productoSeleccionado.cantidadSobrante"  ng-disabled="true" type="number">
+              </label>
+               <label class="item item-input">
+                  <span class="input-label">Cantidad faltante</span>
+                 <input ng-model="productoSeleccionado.cantidadFaltantes" ng-disabled="true" type="number">
+              </label>
+             
+               <center>
+                  <button class="button button-small button-positive " ng-click="verificarNovedades()">
+                    verificar novedades
+                  </button>
+              </center>
+
+
+              <div ng-show="productoSeleccionado.agregarNovedades">
+                    <center>
+                      <img ng-show="productoSeleccionado.imgURI_novedad !== undefined" ng-src="{{imgURI_novedad}}">
+                      <img ng-show="productoSeleccionado.imgURI_novedad === undefined" ng-src="http://placehold.it/300x300">
+                    </center>
+        
+                      <button  ng-disabled="componentes.botonFotoInicioDescarga"  class="button button-block button-positive ion-ios-camera" ng-click="fotoNovedadEdicion()" >
+                          Foto novedad
+                      </button>
+                      <div class="item item-divider">
+                           Tipo novedad 
+                      </div>
+                     <div class="input-label">
+                              <ion-list >
+                                  <ion-checkbox  ng-repeat="novedad in novedades" ng-model="novedad.checked" 
+                                      ng-checked="novedad.checked">{{novedad.texto}}</ion-checkbox>
+                              </ion-list> 
+                            <div class="item item-divider">
+                                  Descripción Novedad 
+                             </div>     
+                             <label class="item item-input item-floating-label">                
+                               <input  ng-model="productoSeleccionado.descripcionNovedad" type="text" placeholder="Agregar descripcion">
+                             </label>      
+                      </div>
+             </div>
+        
+       
+       
+          <button class="button button-block button-positive ion-checkmark-circled" ng-click="finalizarEdicion()" >
+          Finalizar edición
+      </button>
+
+  </div>
+<!--
+<div class="item">
+          <pre ng-bind="productos | json"></pre> 
+  </div>-->
+
+  </ion-content>
+  
+
+
+
+</ion-view>
+

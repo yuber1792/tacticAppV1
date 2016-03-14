@@ -1,0 +1,100 @@
+<ion-view view-title="Salida">
+  
+<ion-nav-bar class="bar-positive">
+        <ion-nav-back-button></ion-nav-back-button>
+      </ion-nav-bar>
+  <ion-content ng-init="activarComponentesSalida()" class="padding">
+  <div class="card" ng-show="jsonIngreso.verUsuario">
+      <div class="item item-text-wrap">
+        Usuario : {{jsonIngreso.usuario}} <br>
+        Bodega : {{jsonIngreso.bodega}} <br>
+        Ambiente : {{jsonIngreso.ambiente}} <br>
+        Nombres : {{jsonIngreso.nombres}} <br>
+        Apellidos : {{jsonIngreso.apellidos}} <br><br>
+        <button class="button button-small button-positive ion-log-in" ng-disabled="jsonIngreso.cerrarSesion"  ng-click="abrirMiCuenta()" >
+          Mi cuenta
+      </button>
+       <button class="button button-small button-positive ion-log-in" ng-disabled="jsonIngreso.cerrarSesion"  ng-click="cerrarSesion()" >
+          Cerrar sesion
+      </button>
+      </div>
+  </div>
+  <div>
+    	 <center>
+      		<img ng-show="imgURI_salida !== undefined" ng-src="{{imgURI_salida}}">
+      	 	<img ng-show="imgURI_salida === undefined" ng-src="http://placehold.it/300x300">
+		  </center>
+      <button ng-disabled="componentes.fotoFinalDescargue" class="button button-block button-positive ion-ios-camera" ng-click="fotoFinalDescargue()" >
+          Foto final descargue
+      </button>
+
+       <button  class="button button-block button-positive ion-checkmark-circled" ng-click="showConfirm()"       ng-disabled="desactivaFinalizacion" >
+           Finaliza recepción salida
+      </button>
+
+     
+    </div>
+        <div ng-show="resultadoInfo" class="card">
+            <div class="item item-divider">
+                Resultado transaccion
+            </div>
+            <div class="item item-text-wrap">
+                El ingreso ha sido guardado exitosamente
+            </div>
+            <div class="item item-text-wrap">
+                id : {{resultado.id}}
+            </div>
+            <div class="item item-text-wrap">
+               token : {{resultado.token}}
+            </div>
+            <div class="item item-divider">
+                    <button  class="button button-block button-positive ion-checkmark-circled" ng-click="nuevoIngreso()"  >
+                     Realizar nuevo ingreso
+                   </button>
+            </div>
+      </div>
+      
+
+      <!--<div class="card">
+           <div class="item item-divider">
+                Historial pedidos
+            </div>
+            <div  class="list card" ng-repeat="data in dataLocal">
+                  <a href="#" class="item item-icon-left">
+                    <i class="icon ion-home"></i>
+                    {{data.placaVehiculo}}
+                  </a>
+            </div>
+
+      </div>-->
+      
+     
+
+   
+     
+   <!--   
+    <div class="item">
+          <pre ng-bind="resultado | json"></pre> 
+      </div>
+      <div class="item">
+          <pre ng-bind="jsonMain | json"></pre> 
+      </div> -->
+     
+   			<!--<center>
+    
+   			<canvas id='signatureCanvas' ng-model="canvas" width='300' height='180' style='border: 1px solid black;'></canvas>
+   		</center>
+          <div class='button-bar'>
+              <a class='button button-energized' ng-click='clearCanvas()'>Clear</a>
+              <a class='button button-balanced' ng-click='saveCanvas()'>Save</a>
+          </div>
+          <br>
+          <img ng-src='{{signature}}'/>-->
+
+  </ion-content>
+  
+
+
+
+</ion-view>
+

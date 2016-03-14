@@ -1,0 +1,291 @@
+<ion-view view-title="Reporte">
+  
+<ion-nav-bar class="bar-positive">
+        <ion-nav-back-button></ion-nav-back-button>
+      </ion-nav-bar>
+  <ion-content  class="padding">
+    	
+      <!--div class="item">
+          <pre ng-bind="jsonReporte | json"></pre> 
+  	  </div-->
+      <center>
+       <img src="./img/tactic.png" style="width: 400px; height: 200px; top: 0%; left: 0%;" >
+     </center>
+      <div class="list">
+      
+
+            <div class="item item-divider">
+              Datos del cliente
+            </div>
+
+          <a class="item item-icon-left" href="#">
+            <i class="icon ion-ios-calendar-outline"></i>
+            Fecha inicio
+            <span class="item-note">
+              {{jsonReporte.fechaInicio}}
+            </span>
+          </a>
+      
+
+           <a class="item item-icon-left" href="#">
+            <i class="icon ion-ios-calendar"></i>
+            Fecha fin
+            <span class="item-note">
+              {{jsonReporte.fechaFinRegistro}}
+            </span>
+          </a>
+
+          <a class="item item-icon-left" href="#">
+            <i class="icon ion-person"></i>
+            Usuario
+            <span class="item-note">
+              {{jsonReporte.usuario}}
+            </span>
+          </a>
+
+            <div class="item item-divider">
+
+              Imagen ingreso
+            </div>
+            <div class="item">
+              <center>
+              <img src="{{jsonReporte.imagenIngreso}}">
+            </center>
+            </div>
+          
+        <a class="item item-icon-left" href="#">
+            <i class="icon ion-person"></i>
+            Cliente
+            <span class="item-note">
+              {{jsonReporte.cliente}}
+            </span>
+          </a>
+
+          <a class="item item-icon-left" href="#">
+            <i class="icon ion-pound"></i>
+            N documento cliente
+            <span class="item-note">
+              {{jsonReporte.numeroDocumentoCliente}}
+            </span>
+          </a>
+
+          <a class="item item-icon-left" href="#">
+            <i class="icon ion-filing"></i>
+            Bodega
+            <span class="item-note">
+              {{jsonReporte.bodega}}
+            </span>
+          </a>
+
+          <a class="item item-icon-left" href="#">
+            <i class="icon ion-ios-cart"></i>
+            Proveedor
+            <span class="item-note">
+              {{jsonReporte.proveedores}}
+            </span>
+          </a>
+
+          <a class="item item-icon-left" href="#">
+            <i class="icon ion-flag"></i>
+            Ciudad origen
+            <span class="item-note">
+              {{jsonReporte.ciudadOrigen}}
+            </span>
+          </a>
+             
+             <div class="item item-divider">
+              Imagen inicio descarga
+            </div>
+            <div class="item ">
+              <center>
+              <img src="{{jsonReporte.imagenInicioDescarga}}">
+            </center>
+            </div>
+
+             <div class="item item-divider">
+              Datos vehiculo y transportadora
+            </div>
+
+         <!-- <a class="item item-icon-left" href="#">
+            <i class="icon ion-ios-paperplane"></i>
+           Transportadora
+            <span class="item-note">
+              {{jsonReporte.transportadora}}
+            </span>
+          </a>-->
+
+             <a class="item item-icon-left" href="#">
+            <i class="icon ion-android-car"></i>
+           Vehiculo
+            <span class="item-note">
+              {{jsonReporte.vehiculo}}
+            </span>
+          </a>
+
+          <a class="item item-icon-left" href="#">
+            <i class="icon ion-ios-barcode"></i>
+           Placa
+            <span class="item-note">
+              {{jsonReporte.placaVehiculo}}
+            </span>
+          </a>
+
+          <a class="item item-icon-left" href="#">
+            <i class="icon ion-ios-barcode-outline"></i>
+           Placa remolque
+            <span class="item-note">
+              {{jsonReporte.placaRemolque}}
+            </span>
+          </a>
+
+
+         <a class="item item-icon-left" href="#">
+            <i class="icon ion-pound"></i>
+            Numero precinto
+            <span class="item-note">
+              {{jsonReporte.numeroPrecinto}}
+            </span>
+          </a>
+
+          <div class="item item-divider">
+              Imagen precinto
+            </div>
+            <div class="item">
+              <center>
+              <img src="{{jsonReporte.fotoPrecinto}}">
+            </center>
+          </div>
+
+
+            <a class="item item-icon-left" href="#">
+            <i class="icon ion-android-document"></i>
+            Documentos producto nacional
+            <span class="item-note">
+              {{jsonReporte.documentosProductoNacional}}
+            </span>
+          </a> 
+
+          <a class="item item-icon-left" href="#">
+            <i class="icon ion-android-document"></i>
+            Documentos producto importado
+            <span class="item-note">
+              {{jsonReporte.documentosProductoImportado}}
+            </span>
+          </a>
+
+          <a class="item item-icon-left" href="#">
+            <i class="icon ion-bag"></i>
+           Plasticos
+            <span class="item-note">
+              {{jsonReporte.plasticos}}
+            </span>
+          </a>
+
+          <a class="item item-icon-left" href="#">
+            <i class="icon ion-pound"></i>
+           Numero tornaguia
+            <span class="item-note">
+              {{jsonReporte.numeroTornaguia}}
+            </span>
+          </a>
+          
+           <a class="item item-icon-left" href="#">
+            <i class="icon ion-cube"></i>
+           fondo cuenta
+            <span class="item-note">
+              {{jsonReporte.fondoCuenta}}
+            </span>
+          </a>
+          
+
+            <div class="item item-divider">
+              Imagen tornaguia
+            </div>
+            <div class="item">
+              <center>
+              <img src="{{jsonReporte.fotoTornaguia}}">
+            </center>
+          </div>
+
+           <div class="item item-divider">
+          Informacion de productos
+            </div>
+
+                <div class="list" ng-repeat="producto in jsonReporte.productos">
+
+                     <div class="item item-divider">
+                Descripcion producto {{$index + 1 }}
+            </div>
+                    <div class="item">
+                      <center>
+                      <img src="{{producto.fotoNovedad}}">
+                    </center>
+                    </div>
+
+                    <a class="item item-icon-left" href="#">
+                      <i class="icon ion-pound"></i>
+                         Codigo
+                      <span class="item-note">
+                        {{producto.producto}}
+                      </span>
+                    </a>
+
+
+                    <a class="item item-icon-left" href="#">
+                      <i class="icon ion-ios-photos-outline"></i>
+                         Cantidad
+                      <span class="item-note">
+                        {{producto.cantidad}}
+                      </span>
+                    </a>
+
+                    <a class="item item-icon-left" href="#">
+                      <i class="icon ion-arrow-graph-up-right"></i>
+                         Estado
+                      <span class="item-note">
+                        {{producto.estadoInventario}}
+                      </span>
+                    </a>
+
+                    <a class="item item-icon-left" href="#">
+                      <i class="icon ion-refresh"></i>
+                         Novedades
+                      <span class="item-note">
+                        {{producto.novedades}}
+                      </span>
+                    </a>
+                    <a class="item item-icon-left" href="#">
+                      <i class="icon ion-ios-information-outline"></i>
+                         Descripcion
+                      <span class="item-note">
+                        {{producto.descripcionNovedad}}
+                      </span>
+                    </a>
+
+            </div>
+
+            <div class="item item-divider">
+              Imagen salida
+            </div>
+            <div class="item">
+              <center>
+              <img src="{{jsonReporte.fotoSalida}}">
+            </center>
+          </div>
+          
+
+      </div>
+
+       <!-- <button class="button button-block button-positive ion-log-in"  ng-click="imprimir()" >
+         Generar pdf
+      </button>-->
+   	
+
+
+  </ion-content>
+  
+
+
+
+</ion-view>
+
